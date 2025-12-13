@@ -1,0 +1,548 @@
+[
+  {
+    "id": 0,
+    "name": "The Fool",
+    "image": "cards/major_00_the_fool.jpg",
+    "upright": "새로운 시작, 순수함, 무한한 가능성",
+    "reversed": "무모함, 준비 부족, 충동적인 행동"
+  },
+  {
+    "id": 1,
+    "name": "The Magician",
+    "image": "cards/major_01_the_magician.jpg",
+    "upright": "의지, 자기표현, 창조의 힘",
+    "reversed": "기만, 자만, 기회 상실"
+  },
+  {
+    "id": 2,
+    "name": "The High Priestess",
+    "image": "cards/major_02_the_high_priestess.jpg",
+    "upright": "직관, 신비, 감춰진 지식",
+    "reversed": "비밀의 폭로, 자기 기만, 혼란"
+  },
+  {
+    "id": 3,
+    "name": "The Empress",
+    "image": "cards/major_03_the_empress.jpg",
+    "upright": "풍요, 모성애, 창조력",
+    "reversed": "의존, 정서적 불안, 억제된 성장"
+  },
+  {
+    "id": 4,
+    "name": "The Emperor",
+    "image": "cards/major_04_the_emperor.jpg",
+    "upright": "안정, 구조, 리더십",
+    "reversed": "권위적, 통제 과잉, 고립"
+  },
+  {
+    "id": 5,
+    "name": "The Hierophant",
+    "image": "cards/major_05_the_hierophant.jpg",
+    "upright": "전통, 교육, 영적 지도",
+    "reversed": "비순응, 속박, 독단"
+  },
+  {
+    "id": 6,
+    "name": "The Lovers",
+    "image": "cards/major_06_the_lovers.jpg",
+    "upright": "사랑, 조화, 중요한 선택",
+    "reversed": "불화, 유혹, 신뢰 부족"
+  },
+  {
+    "id": 7,
+    "name": "The Chariot",
+    "image": "cards/major_07_the_chariot.jpg",
+    "upright": "의지력, 성공, 전진",
+    "reversed": "방향 상실, 억제, 자만"
+  },
+  {
+    "id": 8,
+    "name": "Strength",
+    "image": "cards/major_08_strength.jpg",
+    "upright": "내면의 힘, 인내, 용기",
+    "reversed": "불안, 자기 회의, 힘의 남용"
+  },
+  {
+    "id": 9,
+    "name": "The Hermit",
+    "image": "cards/major_09_the_hermit.jpg",
+    "upright": "고독, 내면 탐색, 지혜",
+    "reversed": "고립, 조언 거부, 길을 잃음"
+  },
+  {
+    "id": 10,
+    "name": "Wheel of Fortune",
+    "image": "cards/major_10_wheel_of_fortune.jpg",
+    "upright": "운명의 전환점, 기회, 변화",
+    "reversed": "예기치 않은 변화, 저항, 불운"
+  },
+  {
+    "id": 11,
+    "name": "Justice",
+    "image": "cards/major_11_justice.jpg",
+    "upright": "균형, 정의, 명확한 판단",
+    "reversed": "불공정, 진실 은폐, 왜곡된 시각"
+  },
+  {
+    "id": 12,
+    "name": "The Hanged Man",
+    "image": "cards/major_12_the_hanged_man.jpg",
+    "upright": "희생, 새로운 시각, 멈춤",
+    "reversed": "지체, 저항, 결단력 부족"
+  },
+  {
+    "id": 13,
+    "name": "Death",
+    "image": "cards/major_13_death.jpg",
+    "upright": "끝과 시작, 변화, 해방",
+    "reversed": "저항, 미련, 변화 거부"
+  },
+  {
+    "id": 14,
+    "name": "Temperance",
+    "image": "cards/major_14_temperance.jpg",
+    "upright": "조화, 치유, 균형",
+    "reversed": "불균형, 과잉, 극단"
+  },
+  {
+    "id": 15,
+    "name": "The Devil",
+    "image": "cards/major_15_the_devil.jpg",
+    "upright": "집착, 중독, 억압",
+    "reversed": "해방, 집착에서 벗어남, 자각"
+  },
+  {
+    "id": 16,
+    "name": "The Tower",
+    "image": "cards/major_16_the_tower.jpg",
+    "upright": "충격, 붕괴, 갑작스런 변화",
+    "reversed": "붕괴 회피, 지연된 변화, 내적 불안"
+  },
+  {
+    "id": 17,
+    "name": "The Star",
+    "image": "cards/major_17_the_star.jpg",
+    "upright": "희망, 치유, 영감",
+    "reversed": "의심, 좌절, 실망"
+  },
+  {
+    "id": 18,
+    "name": "The Moon",
+    "image": "cards/major_18_the_moon.jpg",
+    "upright": "무의식, 환상, 직관",
+    "reversed": "혼란, 속임수, 불안"
+  },
+  {
+    "id": 19,
+    "name": "The Sun",
+    "image": "cards/major_19_the_sun.jpg",
+    "upright": "행복, 명확함, 성공",
+    "reversed": "과도한 낙관, 자신감 부족, 진실 은폐"
+  },
+  {
+    "id": 20,
+    "name": "Judgement",
+    "image": "cards/major_20_judgement.jpg",
+    "upright": "자각, 부름, 재생",
+    "reversed": "회피, 자기 비판, 미완의 과제"
+  },
+  {
+    "id": 21,
+    "name": "The World",
+    "image": "cards/major_21_the_world.jpg",
+    "upright": "완성, 통합, 성취",
+    "reversed": "마무리되지 않음, 지연, 통합 부족"
+  },
+  {
+    "id": 22,
+    "name": "Ace of Wands",
+    "image": "cards/minor_wands_01.jpg",
+    "upright": "영감, 시작, 잠재력",
+    "reversed": "좌절된 열정, 방향 상실, 동기 부족"
+  },
+  {
+    "id": 23,
+    "name": "Two of Wands",
+    "image": "cards/minor_wands_02.jpg",
+    "upright": "계획, 전망, 전략적 선택",
+    "reversed": "결정 장애, 두려움, 기회 상실"
+  },
+  {
+    "id": 24,
+    "name": "Three of Wands",
+    "image": "cards/minor_wands_03.jpg",
+    "upright": "전망, 진보, 확장",
+    "reversed": "지연, 불확실한 미래, 미진한 준비"
+  },
+  {
+    "id": 25,
+    "name": "Four of Wands",
+    "image": "cards/minor_wands_04.jpg",
+    "upright": "축하, 조화, 성취감",
+    "reversed": "불안정, 기대 불일치, 연기된 축하"
+  },
+  {
+    "id": 26,
+    "name": "Five of Wands",
+    "image": "cards/minor_wands_05.jpg",
+    "upright": "경쟁, 갈등, 도전",
+    "reversed": "갈등 해소, 협력, 내적 평화"
+  },
+  {
+    "id": 27,
+    "name": "Six of Wands",
+    "image": "cards/minor_wands_06.jpg",
+    "upright": "승리, 인식, 성취",
+    "reversed": "인정 부족, 자만심, 실패"
+  },
+  {
+    "id": 28,
+    "name": "Seven of Wands",
+    "image": "cards/minor_wands_07.jpg",
+    "upright": "방어, 도전, 신념 지키기",
+    "reversed": "방어 포기, 압도됨, 불안정"
+  },
+  {
+    "id": 29,
+    "name": "Eight of Wands",
+    "image": "cards/minor_wands_08.jpg",
+    "upright": "빠른 움직임, 진행, 커뮤니케이션",
+    "reversed": "지연, 혼란, 속도 조절 필요"
+  },
+  {
+    "id": 30,
+    "name": "Nine of Wands",
+    "image": "cards/minor_wands_09.jpg",
+    "upright": "회복력, 인내, 방어 준비",
+    "reversed": "지침, 방어적 태도, 불신"
+  },
+  {
+    "id": 31,
+    "name": "Ten of Wands",
+    "image": "cards/minor_wands_10.jpg",
+    "upright": "과중한 부담, 책임, 노력의 끝",
+    "reversed": "과부하 탈출, 위임, 방해 요소 제거"
+  },
+  {
+    "id": 32,
+    "name": "Page of Wands",
+    "image": "cards/minor_wands_page.jpg",
+    "upright": "열정, 발견, 창조적 에너지",
+    "reversed": "미성숙, 흥미 부족, 방황"
+  },
+  {
+    "id": 33,
+    "name": "Knight of Wands",
+    "image": "cards/minor_wands_knight.jpg",
+    "upright": "행동력, 모험심, 추진력",
+    "reversed": "충동성, 불안정, 변덕"
+  },
+  {
+    "id": 34,
+    "name": "Queen of Wands",
+    "image": "cards/minor_wands_queen.jpg",
+    "upright": "자신감, 활력, 사회성",
+    "reversed": "질투, 자기 의심, 위선"
+  },
+  {
+    "id": 35,
+    "name": "King of Wands",
+    "image": "cards/minor_wands_king.jpg",
+    "upright": "리더십, 비전, 영향력",
+    "reversed": "권위 남용, 독단적, 무모함"
+  },
+  {
+    "id": 36,
+    "name": "Ace of Cups",
+    "image": "cards/minor_cups_01.jpg",
+    "upright": "새로운 감정, 사랑, 직관",
+    "reversed": "감정 억제, 연결 부족, 정서적 장애"
+  },
+  {
+    "id": 37,
+    "name": "Two of Cups",
+    "image": "cards/minor_cups_02.jpg",
+    "upright": "파트너십, 조화, 감정 교류",
+    "reversed": "불화, 오해, 관계의 균열"
+  },
+  {
+    "id": 38,
+    "name": "Three of Cups",
+    "image": "cards/minor_cups_03.jpg",
+    "upright": "축하, 우정, 공동체",
+    "reversed": "과잉, 소외, 감정적 거리감"
+  },
+  {
+    "id": 39,
+    "name": "Four of Cups",
+    "image": "cards/minor_cups_04.jpg",
+    "upright": "무관심, 자기 반성, 제안 무시",
+    "reversed": "새로운 인식, 기회 수용, 정서적 열림"
+  },
+  {
+    "id": 40,
+    "name": "Five of Cups",
+    "image": "cards/minor_cups_05.jpg",
+    "upright": "상실, 후회, 실망",
+    "reversed": "회복, 용서, 새로운 희망"
+  },
+  {
+    "id": 41,
+    "name": "Six of Cups",
+    "image": "cards/minor_cups_06.jpg",
+    "upright": "추억, 순수함, 과거의 기쁨",
+    "reversed": "집착, 과거 회상에 갇힘, 성장 필요"
+  },
+  {
+    "id": 42,
+    "name": "Seven of Cups",
+    "image": "cards/minor_cups_07.jpg",
+    "upright": "환상, 선택, 상상력",
+    "reversed": "혼란에서 벗어남, 명확한 선택, 집중"
+  },
+  {
+    "id": 43,
+    "name": "Eight of Cups",
+    "image": "cards/minor_cups_08.jpg",
+    "upright": "이탈, 새로운 여정, 실망 후 전환",
+    "reversed": "돌아옴, 감정적 미련, 회피"
+  },
+  {
+    "id": 44,
+    "name": "Nine of Cups",
+    "image": "cards/minor_cups_09.jpg",
+    "upright": "감정적 만족, 소원 성취, 즐거움",
+    "reversed": "공허함, 자만, 진정한 만족 부족"
+  },
+  {
+    "id": 45,
+    "name": "Ten of Cups",
+    "image": "cards/minor_cups_10.jpg",
+    "upright": "가족, 조화, 영적 충만함",
+    "reversed": "불화, 단절, 기대 불일치"
+  },
+  {
+    "id": 46,
+    "name": "Page of Cups",
+    "image": "cards/minor_cups_page.jpg",
+    "upright": "창의성, 감정 표현, 메시지",
+    "reversed": "감정 억제, 유치함, 감정적 미성숙"
+  },
+  {
+    "id": 47,
+    "name": "Knight of Cups",
+    "image": "cards/minor_cups_knight.jpg",
+    "upright": "로맨스, 이상주의, 제안",
+    "reversed": "현실 도피, 유혹, 감정적 불안정"
+  },
+  {
+    "id": 48,
+    "name": "Queen of Cups",
+    "image": "cards/minor_cups_queen.jpg",
+    "upright": "공감, 직관, 감정적 안정",
+    "reversed": "감정 과잉, 불안정, 자기 희생"
+  },
+  {
+    "id": 49,
+    "name": "King of Cups",
+    "image": "cards/minor_cups_king.jpg",
+    "upright": "감정적 균형, 배려심, 성숙함",
+    "reversed": "감정 억제, 조작적 태도, 불안한 리더십"
+  },
+  {
+    "id": 50,
+    "name": "Ace of Swords",
+    "image": "cards/minor_swords_01.jpg",
+    "upright": "진실, 명료성, 새로운 지성",
+    "reversed": "혼란, 오해, 진실 왜곡"
+  },
+  {
+    "id": 51,
+    "name": "Two of Swords",
+    "image": "cards/minor_swords_02.jpg",
+    "upright": "결정, 균형, 중립적 입장",
+    "reversed": "우유부단, 진실 회피, 불균형"
+  },
+  {
+    "id": 52,
+    "name": "Three of Swords",
+    "image": "cards/minor_swords_03.jpg",
+    "upright": "상처, 배신, 마음의 아픔",
+    "reversed": "회복, 용서, 감정 정화"
+  },
+  {
+    "id": 53,
+    "name": "Four of Swords",
+    "image": "cards/minor_swords_04.jpg",
+    "upright": "휴식, 재충전, 내면의 평화",
+    "reversed": "불안, 강제된 정지, 회복 지연"
+  },
+  {
+    "id": 54,
+    "name": "Five of Swords",
+    "image": "cards/minor_swords_05.jpg",
+    "upright": "갈등, 이기심, 승리의 대가",
+    "reversed": "화해, 교훈, 자존감 회복"
+  },
+  {
+    "id": 55,
+    "name": "Six of Swords",
+    "image": "cards/minor_swords_06.jpg",
+    "upright": "이동, 전환, 치유의 여정",
+    "reversed": "떠나지 못함, 저항, 변화의 두려움"
+  },
+  {
+    "id": 56,
+    "name": "Seven of Swords",
+    "image": "cards/minor_swords_07.jpg",
+    "upright": "기만, 전략, 독립적 행동",
+    "reversed": "폭로, 정직, 실수 시인"
+  },
+  {
+    "id": 57,
+    "name": "Eight of Swords",
+    "image": "cards/minor_swords_08.jpg",
+    "upright": "제한, 속박, 무기력",
+    "reversed": "해방, 인식의 전환, 희망"
+  },
+  {
+    "id": 58,
+    "name": "Nine of Swords",
+    "image": "cards/minor_swords_09.jpg",
+    "upright": "불안, 악몽, 스트레스",
+    "reversed": "회복, 두려움 극복, 위로"
+  },
+  {
+    "id": 59,
+    "name": "Ten of Swords",
+    "image": "cards/minor_swords_10.jpg",
+    "upright": "끝장, 배신, 고통의 극치",
+    "reversed": "재기, 끝난 고통, 새로운 시작"
+  },
+  {
+    "id": 60,
+    "name": "Page of Swords",
+    "image": "cards/minor_swords_page.jpg",
+    "upright": "호기심, 관찰, 새로운 아이디어",
+    "reversed": "감시, 소문, 판단 부족"
+  },
+  {
+    "id": 61,
+    "name": "Knight of Swords",
+    "image": "cards/minor_swords_knight.jpg",
+    "upright": "결단력, 추진력, 명확한 목표",
+    "reversed": "충동성, 무모함, 과잉 반응"
+  },
+  {
+    "id": 62,
+    "name": "Queen of Swords",
+    "image": "cards/minor_swords_queen.jpg",
+    "upright": "지혜, 독립성, 명료한 사고",
+    "reversed": "냉소, 고립, 정서적 차단"
+  },
+  {
+    "id": 63,
+    "name": "King of Swords",
+    "image": "cards/minor_swords_king.jpg",
+    "upright": "지성, 논리, 권위 있는 판단",
+    "reversed": "냉혹함, 독재, 부정확한 판단"
+  },
+  {
+    "id": 64,
+    "name": "Ace of Pentacles",
+    "image": "cards/minor_pentacles_01.jpg",
+    "upright": "새로운 기회, 물질적 시작, 풍요의 씨앗",
+    "reversed": "기회의 상실, 지연, 불안정한 출발"
+  },
+  {
+    "id": 65,
+    "name": "Two of Pentacles",
+    "image": "cards/minor_pentacles_02.jpg",
+    "upright": "균형 잡기, 유연함, 다중 작업",
+    "reversed": "혼란, 우선순위 상실, 무질서"
+  },
+  {
+    "id": 66,
+    "name": "Three of Pentacles",
+    "image": "cards/minor_pentacles_03.jpg",
+    "upright": "협업, 기술, 공동 창작",
+    "reversed": "불협화음, 노력 부족, 팀워크 문제"
+  },
+  {
+    "id": 67,
+    "name": "Four of Pentacles",
+    "image": "cards/minor_pentacles_04.jpg",
+    "upright": "소유, 안정, 절약",
+    "reversed": "집착, 인색함, 불안정"
+  },
+  {
+    "id": 68,
+    "name": "Five of Pentacles",
+    "image": "cards/minor_pentacles_05.jpg",
+    "upright": "결핍, 상실, 소외",
+    "reversed": "회복, 희망, 도움 받기"
+  },
+  {
+    "id": 69,
+    "name": "Six of Pentacles",
+    "image": "cards/minor_pentacles_06.jpg",
+    "upright": "나눔, 관대함, 균형 잡힌 교환",
+    "reversed": "불균형, 기대감, 의존"
+  },
+  {
+    "id": 70,
+    "name": "Seven of Pentacles",
+    "image": "cards/minor_pentacles_07.jpg",
+    "upright": "기다림, 장기적 관점, 인내",
+    "reversed": "실망, 시간 낭비, 인내 부족"
+  },
+  {
+    "id": 71,
+    "name": "Eight of Pentacles",
+    "image": "cards/minor_pentacles_08.jpg",
+    "upright": "노력, 기술 연마, 장인정신",
+    "reversed": "지루함, 집중력 부족, 결과 없음"
+  },
+  {
+    "id": 72,
+    "name": "Nine of Pentacles",
+    "image": "cards/minor_pentacles_09.jpg",
+    "upright": "자립, 물질적 풍요, 성취",
+    "reversed": "허세, 독립성 부족, 불안한 기반"
+  },
+  {
+    "id": 73,
+    "name": "Ten of Pentacles",
+    "image": "cards/minor_pentacles_10.jpg",
+    "upright": "유산, 가족, 장기적 안정",
+    "reversed": "불안정한 유산, 분열, 단절"
+  },
+  {
+    "id": 74,
+    "name": "Page of Pentacles",
+    "image": "cards/minor_pentacles_page.jpg",
+    "upright": "학습, 기회 발견, 실용적 아이디어",
+    "reversed": "게으름, 집중력 부족, 실현력 부족"
+  },
+  {
+    "id": 75,
+    "name": "Knight of Pentacles",
+    "image": "cards/minor_pentacles_knight.jpg",
+    "upright": "책임감, 끈기, 꾸준한 진전",
+    "reversed": "완고함, 느림, 융통성 부족"
+  },
+  {
+    "id": 76,
+    "name": "Queen of Pentacles",
+    "image": "cards/minor_pentacles_queen.jpg",
+    "upright": "현실감각, 풍요, 양육",
+    "reversed": "과보호, 물질 집착, 피로"
+  },
+  {
+    "id": 77,
+    "name": "King of Pentacles",
+    "image": "cards/minor_pentacles_king.jpg",
+    "upright": "부, 안정, 신뢰할 수 있는 지도자",
+    "reversed": "탐욕, 고집, 물질 중심"
+  }
+]

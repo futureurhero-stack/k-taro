@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한복 타로 점</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <header class="header">
+            <h1 class="title">🎴 한복 타로 점</h1>
+            <p class="subtitle">전통과 현대가 만나는 운명의 카드</p>
+        </header>
+
+        <!-- 초기 모드 선택 화면 -->
+        <div class="mode-selection" id="modeSelection">
+            <div class="welcome-message">
+                <h2>타로점을 보러 오셨나요?</h2>
+                <p class="welcome-desc">원하시는 모드를 선택해주세요</p>
+            </div>
+            <div class="mode-buttons">
+                <button class="mode-btn" data-mode="1" data-name="오늘의 운">
+                    <span class="mode-icon">✨</span>
+                    <span class="mode-title">오늘의 운</span>
+                    <span class="mode-desc">하루를 시작하기 전에 오늘 하루의 운세를 확인해보세요. 빠른 조언과 데일리 메시지를 받을 수 있습니다.</span>
+                    <span class="mode-count">1장</span>
+                </button>
+                <button class="mode-btn" data-mode="3" data-name="미래 예측">
+                    <span class="mode-icon">🔮</span>
+                    <span class="mode-title">미래 예측</span>
+                    <span class="mode-desc">과거, 현재, 미래를 통해 인생의 흐름을 파악하세요. 시간의 흐름에 따른 변화를 예측할 수 있습니다.</span>
+                    <span class="mode-count">3장</span>
+                </button>
+                <button class="mode-btn" data-mode="5" data-name="현재상황 분석">
+                    <span class="mode-icon">📊</span>
+                    <span class="mode-title">현재상황 분석</span>
+                    <span class="mode-desc">복잡한 상황을 깊이 있게 분석해보세요. 과거부터 결과까지 전체적인 맥락을 파악할 수 있습니다.</span>
+                    <span class="mode-count">5장</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 카드 섞는 화면 -->
+        <div class="shuffling-screen" id="shufflingScreen" style="display: none;">
+            <div class="shuffling-message">
+                <h2>카드를 섞고 있습니다...</h2>
+                <div class="shuffling-animation">
+                    <div class="card-shuffle"></div>
+                    <div class="card-shuffle"></div>
+                    <div class="card-shuffle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 카드 선택 안내 -->
+        <div class="selection-guide" id="selectionGuide" style="display: none;">
+            <h2>이제 카드를 선택해주세요</h2>
+            <p>카드를 <span id="selectedCount">0</span> / <span id="totalCount">0</span> 장 선택하세요</p>
+            <button class="confirm-btn" id="confirmBtn" style="display: none;">선택 완료</button>
+        </div>
+
+        <!-- 카드 선택 안내 -->
+        <div class="selection-guide" id="selectionGuide" style="display: none;">
+            <p>카드를 <span id="selectedCount">0</span> / <span id="totalCount">0</span> 장 선택하세요</p>
+            <button class="confirm-btn" id="confirmBtn" style="display: none;">선택 완료</button>
+        </div>
+
+        <!-- 카드 표시 영역 (78장 전체) -->
+        <div class="all-cards-wrapper" id="allCardsWrapper" style="display: none;">
+            <div class="all-cards-container" id="allCardsContainer"></div>
+            <!-- 모바일 스와이프 네비게이션 -->
+            <div class="swipe-indicator" id="swipeIndicator">
+                <span>← 좌우로 스와이프하여 카드를 탐색하세요 →</span>
+            </div>
+        </div>
+
+        <!-- 선택된 카드 표시 영역 -->
+        <div class="selected-cards-container" id="selectedCardsContainer"></div>
+
+        <!-- 해석 영역 -->
+        <div class="interpretation" id="interpretation"></div>
+
+        <!-- 다시 뽑기 버튼 -->
+        <div class="reset-section" id="resetSection" style="display: none;">
+            <button class="reset-btn" id="resetBtn">다시 뽑기</button>
+        </div>
+    </div>
+
+    <!-- 배경음악 (선택사항 - 오디오 파일이 있으면 src에 경로 추가) -->
+    <audio id="bgMusic" loop>
+        <!-- 배경음악 파일이 있으면 여기에 추가하세요 -->
+        <!-- <source src="sounds/background.mp3" type="audio/mpeg"> -->
+    </audio>
+
+    <!-- 효과음 -->
+    <audio id="cardShuffleSound" preload="auto">
+        <source src="shuffle_cards_sound.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="cardSelectSound" preload="auto">
+        <!-- 카드 선택 효과음 파일이 있으면 여기에 추가하세요 -->
+        <!-- <source src="sounds/card-select.wav" type="audio/wav"> -->
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

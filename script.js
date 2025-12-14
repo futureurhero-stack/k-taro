@@ -92,28 +92,39 @@ async function loadCardsData() {
 function setupEventListeners() {
     console.log('이벤트 리스너 설정 시작');
     
-    // 모드 선택 버튼 - 이벤트 위임 사용
-    const modeSelection = document.getElementById('modeSelection');
-    if (modeSelection) {
-        console.log('modeSelection 요소 찾음');
-        modeSelection.addEventListener('click', (e) => {
-            // 클릭된 요소가 버튼이거나 버튼의 자식인지 확인
-            const modeBtn = e.target.closest('.mode-btn');
-            if (modeBtn) {
-                e.preventDefault();
-                e.stopPropagation();
-                const mode = modeBtn.dataset.mode;
-                const modeName = modeBtn.dataset.name;
-                console.log('모드 선택됨:', mode, modeName);
-                if (mode && modeName) {
-                    selectedCardCount = parseInt(mode);
-                    selectMode(modeName);
-                }
+    // 모드 선택 버튼 - 직접 바인딩
+    const modeButtons = document.querySelectorAll('.mode-btn');
+    console.log('모드 버튼 개수:', modeButtons.length);
+    
+    modeButtons.forEach((btn, index) => {
+        console.log(`버튼 ${index} 바인딩:`, btn);
+        // 버튼과 내부 모든 요소에 클릭 이벤트 방지
+        btn.style.cursor = 'pointer';
+        btn.style.userSelect = 'none';
+        
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('버튼 클릭됨:', this);
+            const mode = this.dataset.mode;
+            const modeName = this.dataset.name;
+            console.log('모드 데이터:', mode, modeName);
+            
+            if (mode && modeName) {
+                selectedCardCount = parseInt(mode);
+                console.log('선택된 카드 수:', selectedCardCount);
+                selectMode(modeName);
+            } else {
+                console.error('모드 데이터가 없습니다:', this);
             }
+        }, true); // capture phase에서도 이벤트 처리
+        
+        // 버튼 내부 요소들도 클릭 가능하도록
+        const spans = btn.querySelectorAll('span');
+        spans.forEach(span => {
+            span.style.pointerEvents = 'none'; // span 클릭을 버튼으로 전달
         });
-    } else {
-        console.error('modeSelection 요소를 찾을 수 없습니다');
-    }
+    });
 
     // 선택 완료 버튼
     const confirmBtn = document.getElementById('confirmBtn');

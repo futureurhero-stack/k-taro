@@ -90,9 +90,12 @@ async function loadCardsData() {
 
 // 이벤트 리스너 설정
 function setupEventListeners() {
+    console.log('이벤트 리스너 설정 시작');
+    
     // 모드 선택 버튼 - 이벤트 위임 사용
     const modeSelection = document.getElementById('modeSelection');
     if (modeSelection) {
+        console.log('modeSelection 요소 찾음');
         modeSelection.addEventListener('click', (e) => {
             // 클릭된 요소가 버튼이거나 버튼의 자식인지 확인
             const modeBtn = e.target.closest('.mode-btn');
@@ -102,10 +105,14 @@ function setupEventListeners() {
                 const mode = modeBtn.dataset.mode;
                 const modeName = modeBtn.dataset.name;
                 console.log('모드 선택됨:', mode, modeName);
-                selectedCardCount = parseInt(mode);
-                selectMode(modeName);
+                if (mode && modeName) {
+                    selectedCardCount = parseInt(mode);
+                    selectMode(modeName);
+                }
             }
         });
+    } else {
+        console.error('modeSelection 요소를 찾을 수 없습니다');
     }
 
     // 선택 완료 버튼
@@ -124,6 +131,8 @@ function setupEventListeners() {
     if (isMobile) {
         setupSwipeEvents();
     }
+    
+    console.log('이벤트 리스너 설정 완료');
 }
 
 // 모드 선택
@@ -134,12 +143,18 @@ function selectMode(modeName) {
     const modeSelection = document.getElementById('modeSelection');
     if (modeSelection) {
         modeSelection.style.display = 'none';
+        console.log('모드 선택 화면 숨김');
+    } else {
+        console.error('modeSelection 요소를 찾을 수 없습니다');
     }
     
     // 카드 섞는 화면 표시
     const shufflingScreen = document.getElementById('shufflingScreen');
     if (shufflingScreen) {
         shufflingScreen.style.display = 'block';
+        console.log('카드 섞는 화면 표시');
+    } else {
+        console.error('shufflingScreen 요소를 찾을 수 없습니다');
     }
     
     // 카드 섞기 효과음 재생

@@ -613,96 +613,113 @@ function getCardImageDescription(cardName) {
     return descriptions[cardName] || '이 카드에는 한복 테마로 재해석된 아름다운 그림이 그려져 있어요.';
 }
 
-// 해석을 자연스럽게 변환하는 함수
+// 타로 리더 스타일 해석 생성 함수
 function formatInterpretation(card, position, isLast) {
     const isReversed = card.isReversed;
     const baseMeaning = isReversed ? card.reversed : card.upright;
     const meanings = baseMeaning.split(', ');
     
-    // 카드 그림 설명 추가
-    const imageDescription = getCardImageDescription(card.name);
+    // 개인적인 타로 리딩 생성
+    let reading = createPersonalReading(card, position, isReversed, meanings, isLast);
     
-    // 위치에 따른 자연스러운 인사말
-    let intro = '';
-    if (selectedCardCount === 1) {
-        const intros = [
-            '이 카드가 당신에게 전하는 메시지를 살펴보면,',
-            '이 카드를 통해 보이는 것은,',
-            '이 카드가 말하고자 하는 것은,'
-        ];
-        intro = intros[Math.floor(Math.random() * intros.length)];
-    } else {
-        switch(position) {
-            case '과거':
-                intro = '과거를 되돌아보면,';
-                break;
-            case '현재':
-                intro = '지금 이 순간 당신의 상황은,';
-                break;
-            case '미래':
-                intro = '앞으로 펼쳐질 미래에는,';
-                break;
-            case '조언':
-                intro = '이 카드가 당신에게 건네는 조언은,';
-                break;
-            case '결과':
-                intro = '이 상황이 가져올 결과는,';
-                break;
-            default:
-                intro = '이 카드가 보여주는 것은,';
+    return reading;
+}
+
+// 개인적인 타로 리딩 생성 - 말하는 것처럼
+function createPersonalReading(card, position, isReversed, meanings, isLast) {
+    let reading = '';
+    
+    // 1. Opening - 순간 인정
+    const openings = [
+        '이 카드가 지금 여기 있네요.',
+        '이 카드가 당신 앞에 있습니다.',
+        '이 카드를 보니...',
+        '이 카드가 말하고 있어요.'
+    ];
+    reading = openings[Math.floor(Math.random() * openings.length)] + ' ';
+    
+    if (selectedCardCount > 1) {
+        const positionOpenings = {
+            '과거': '이건 이미 지나간 시간 속에 있었던 거예요. ',
+            '현재': '지금 이 순간, 당신의 마음 한편에 있는 거예요. ',
+            '미래': '앞으로 펼쳐질 시간에 대해 이야기하고 있어요. ',
+            '조언': '이 카드가 조용히 건네는 말이 있어요. ',
+            '결과': '이게 당신의 길이 향하는 곳이에요. '
+        };
+        if (positionOpenings[position]) {
+            reading = positionOpenings[position];
         }
     }
     
-    // 의미를 자연스러운 문장으로 변환
-    let explanation = '';
+    // 2. Emotional Reflection - 감정적 반영
+    reading += '당신이 지금 느끼고 있는 것, ';
+    reading += '아니면 느끼려 하지 않으려 하는 것, ';
+    reading += '그런 게 여기 있을 수 있어요. ';
+    
+    // 3. Card Interpretation - 감정적 의미
     if (meanings.length === 1) {
-        explanation = meanings[0] + '을(를) 의미하고 있어요.';
+        reading += meanings[0] + '이라는 것. ';
+        reading += '이게 당신의 마음에 자리하고 있는 것 같아요. ';
     } else if (meanings.length === 2) {
-        explanation = meanings[0] + '과(와) ' + meanings[1] + '을(를) 나타내고 있습니다.';
+        reading += meanings[0] + '과 ' + meanings[1] + '. ';
+        reading += '이 두 가지가 당신의 지금과 함께 있네요. ';
     } else {
         const lastMeaning = meanings[meanings.length - 1];
         const otherMeanings = meanings.slice(0, -1).join(', ');
-        explanation = otherMeanings + ', 그리고 ' + lastMeaning + '을(를) 의미하고 있어요.';
+        reading += otherMeanings + ', 그리고 ' + lastMeaning + '. ';
+        reading += '이런 것들이 당신의 마음과 만나고 있어요. ';
     }
     
-    // 방향에 따른 자연스러운 추가 설명
-    let directionNote = '';
+    // 4. Gentle Guidance - 부드러운 안내
+    reading += '잠깐... ';
+    
     if (isReversed) {
-        const reversedNotes = [
-            ' 역방향으로 나온 이 카드는, 현재 상황이 예상과 다르게 흘러가고 있거나 주의가 필요하다는 신호예요.',
-            ' 역방향으로 나온 이 카드는, 에너지가 막혀있거나 방향 전환이 필요할 수 있다는 의미입니다.',
-            ' 역방향으로 나온 이 카드는, 지금은 조금 더 신중하게 접근해야 할 때일 수 있어요.'
+        const reversedGuidance = [
+            '이게 뒤집혀 있네요. 당신의 마음이 지금 어디를 향하고 있는지, 조금 더 천천히 살펴볼 수 있을 것 같아요.',
+            '뒤집혀 보입니다. 지금 무엇을 피하고 있는지, 아니면 무엇을 다시 봐야 하는지, 생각해볼 수 있어요.',
+            '거꾸로 있네요. 당신의 길이 지금 어디로 향하고 있는지, 다시 한 번 느껴볼 수 있을 것 같아요.'
         ];
-        directionNote = reversedNotes[Math.floor(Math.random() * reversedNotes.length)];
+        reading += reversedGuidance[Math.floor(Math.random() * reversedGuidance.length)] + ' ';
     } else {
-        const uprightNotes = [
-            ' 정방향으로 나온 이 카드는, 긍정적인 에너지가 잘 흐르고 있다는 좋은 신호예요.',
-            ' 정방향으로 나온 이 카드는, 현재 상황이 순조롭게 진행되고 있다는 의미입니다.',
-            ' 정방향으로 나온 이 카드는, 당신의 길이 열려있다는 것을 보여주고 있어요.'
+        const uprightGuidance = [
+            '이게 바로 보이네요. 당신의 길이 지금 어디로 향하고 있는지, 느낄 수 있을 것 같아요.',
+            '바로 있습니다. 당신이 지금 어디에 있는지, 그리고 어디로 가고 있는지, 알 수 있을 것 같아요.',
+            '바로 보입니다. 당신의 마음이 지금 무엇을 원하고 있는지, 들을 수 있을 것 같아요.'
         ];
-        directionNote = uprightNotes[Math.floor(Math.random() * uprightNotes.length)];
+        reading += uprightGuidance[Math.floor(Math.random() * uprightGuidance.length)] + ' ';
     }
     
-    // 전체 해석 구성
-    let fullInterpretation = '';
+    // 질문 추가 (70% 확률)
+    if (Math.random() < 0.7) {
+        const questions = [
+            '이 말이 당신의 어디에 닿나요?',
+            '이것이 떠오르게 하는 기억이 있나요?',
+            '당신의 마음 어디에서 이 이야기가 울리는가요?',
+            '누구의 얼굴이 떠오르시나요?',
+            '이것이 당신에게 익숙한 느낌인가요?',
+            '당신이 조용히 간직하고 있던 것이 이것인가요?',
+            '이 말이 당신의 어느 부분과 마주하고 있나요?'
+        ];
+        reading += '\n\n' + questions[Math.floor(Math.random() * questions.length)];
+    }
     
-    // 카드 그림 설명 먼저 추가
-    fullInterpretation += imageDescription + ' ';
-    fullInterpretation += '\n\n';
+    // 5. Closing - 조용한 메아리
+    const closings = [
+        '이 말을 마음에 두고 하루를 보내보세요.',
+        '이 이야기를 가지고 오늘을 살펴보세요.',
+        '이 말들이 당신과 함께 있기를 바라요.',
+        '이것을 마음에 두고 천천히 걸어가시길 바라요.'
+    ];
     
-    // 위치별 인사말과 의미
-    fullInterpretation += intro + ' ';
-    fullInterpretation += explanation;
-    fullInterpretation += directionNote;
-    
-    // 추가 조언 (카드에 따라)
     if (selectedCardCount > 1 && !isLast) {
-        fullInterpretation += ' 이제 다음 카드를 함께 살펴보면 더 명확해질 거예요.';
+        reading += '\n\n' + '이제 다음 카드를 함께 보아요.';
     } else if (isLast && selectedCardCount > 1) {
-        fullInterpretation += ' 모든 카드를 종합해보면, 당신의 상황에 대한 전체적인 흐름을 파악할 수 있을 거예요.';
+        reading += '\n\n' + '모든 카드를 함께 보니, 당신의 상황에 대한 흐름이 보이네요.';
+    } else {
+        reading += '\n\n' + closings[Math.floor(Math.random() * closings.length)];
     }
     
-    return fullInterpretation;
+    return reading;
 }
 
 // 해석 표시 함수
@@ -710,23 +727,20 @@ function displayInterpretation() {
     const interpretationDiv = document.getElementById('interpretation');
     interpretationDiv.innerHTML = '';
     
-    const title = document.createElement('h3');
-    title.textContent = '📖 카드 해석';
-    interpretationDiv.appendChild(title);
-    
-    // 전체 해석 소개 문구
+    // 제목 없이 바로 시작 - 더 자연스럽게
+    // 전체 해석 소개 문구 - 더 따뜻하고 개인적으로
     const introText = document.createElement('div');
     introText.className = 'interpretation-intro';
     const introMessages = selectedCardCount === 1 
         ? [
-            '뽑으신 카드의 의미를 자세히 설명해드릴게요.',
-            '이 카드가 당신에게 전하는 메시지를 함께 살펴보아요.',
-            '카드가 보여주는 의미를 하나씩 풀어드리겠습니다.'
+            '이 카드가 지금 당신 앞에 있어요. 함께 보아요.',
+            '이 카드가 지금 여기 있는 이유가 있어요.',
+            '당신이 선택한 이 카드를 함께 보아요.'
         ]
         : [
-            '뽑으신 카드들을 순서대로 해석해드리겠습니다.',
-            '각 카드의 의미를 차근차근 설명해드릴게요.',
-            '카드들이 전하는 이야기를 함께 들어보아요.'
+            '당신이 선택한 카드들이 여기 있어요. 하나씩 함께 보아요.',
+            '이 카드들이 당신에게 말하고 있는 걸 함께 들어보아요.',
+            '당신이 고른 카드들을 순서대로 살펴보아요.'
         ];
     introText.textContent = introMessages[Math.floor(Math.random() * introMessages.length)];
     interpretationDiv.appendChild(introText);
@@ -744,19 +758,19 @@ function displayInterpretation() {
             cardInterp.appendChild(document.createElement('br'));
         }
         
-        // 카드 이름
-        const cardName = document.createElement('div');
-        cardName.className = 'card-name';
-        cardName.textContent = card.name;
-        cardInterp.appendChild(cardName);
+        // 카드 이름과 방향을 더 자연스럽게
+        const cardInfo = document.createElement('div');
+        cardInfo.className = 'card-name';
+        cardInfo.style.marginBottom = '15px';
+        cardInfo.style.fontSize = '1.1rem';
+        cardInfo.style.color = '#6b4423';
         
-        // 방향 레이블
-        const direction = document.createElement('span');
-        direction.className = 'direction';
-        direction.textContent = card.isReversed ? '역방향' : '정방향';
-        cardInterp.appendChild(direction);
-        cardInterp.appendChild(document.createElement('br'));
-        cardInterp.appendChild(document.createElement('br'));
+        let cardInfoText = card.name;
+        if (card.isReversed) {
+            cardInfoText += ' (뒤집혀 있음)';
+        }
+        cardInfo.textContent = cardInfoText;
+        cardInterp.appendChild(cardInfo);
         
         // 자연스러운 해석
         const meaning = document.createElement('div');
@@ -781,14 +795,14 @@ function displayInterpretation() {
         interpretationDiv.appendChild(cardInterp);
     });
     
-    // 마무리 문구
+    // 마무리 문구 - 더 조용하고 개인적으로
     const closingText = document.createElement('div');
     closingText.className = 'interpretation-closing';
     const closingMessages = [
-        '✨ 이 해석이 당신에게 도움이 되길 바랍니다.',
-        '✨ 카드가 전하는 메시지를 마음에 새겨보세요.',
-        '✨ 이 해석을 참고하시되, 자신의 직감도 믿어보세요.',
-        '✨ 카드의 의미를 되새기며 앞으로 나아가시길 응원합니다.'
+        '이 말들을 마음에 두고 하루를 보내보세요.',
+        '이 이야기를 가지고 오늘을 살펴보세요.',
+        '이 말들이 당신과 함께 있기를 바라요.',
+        '이것을 마음에 두고 천천히 걸어가시길 바라요.'
     ];
     closingText.textContent = closingMessages[Math.floor(Math.random() * closingMessages.length)];
     interpretationDiv.appendChild(closingText);

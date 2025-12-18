@@ -613,113 +613,193 @@ function getCardImageDescription(cardName) {
     return descriptions[cardName] || '이 카드에는 한복 테마로 재해석된 아름다운 그림이 그려져 있어요.';
 }
 
-// 타로 리더 스타일 해석 생성 함수
+// 전문 타로 리더 스타일 해석 생성 함수
 function formatInterpretation(card, position, isLast) {
     const isReversed = card.isReversed;
     const baseMeaning = isReversed ? card.reversed : card.upright;
     const meanings = baseMeaning.split(', ');
     
-    // 개인적인 타로 리딩 생성
-    let reading = createPersonalReading(card, position, isReversed, meanings, isLast);
+    // 전문 타로 리딩 생성
+    let reading = createProfessionalReading(card, position, isReversed, meanings, isLast);
     
     return reading;
 }
 
-// 개인적인 타로 리딩 생성 - 말하는 것처럼
-function createPersonalReading(card, position, isReversed, meanings, isLast) {
+// 전문 타로 리딩 생성 - 구조화된 형식
+function createProfessionalReading(card, position, isReversed, meanings, isLast) {
     let reading = '';
     
-    // 1. Opening - 순간 인정
-    const openings = [
-        '이 카드가 지금 여기 있네요.',
-        '이 카드가 당신 앞에 있습니다.',
-        '이 카드를 보니...',
-        '이 카드가 말하고 있어요.'
-    ];
-    reading = openings[Math.floor(Math.random() * openings.length)] + ' ';
+    // [1] 핵심 메시지 (한 줄, 굵게)
+    const coreMessages = getCoreMessage(card, isReversed, meanings);
+    reading += '**' + coreMessages[Math.floor(Math.random() * coreMessages.length)] + '**\n\n';
     
-    if (selectedCardCount > 1) {
-        const positionOpenings = {
-            '과거': '이건 이미 지나간 시간 속에 있었던 거예요. ',
-            '현재': '지금 이 순간, 당신의 마음 한편에 있는 거예요. ',
-            '미래': '앞으로 펼쳐질 시간에 대해 이야기하고 있어요. ',
-            '조언': '이 카드가 조용히 건네는 말이 있어요. ',
-            '결과': '이게 당신의 길이 향하는 곳이에요. '
-        };
-        if (positionOpenings[position]) {
-            reading = positionOpenings[position];
-        }
-    }
+    // [2] 상황 & 감정 (2-3문장)
+    const situation = getSituationText(card, position, isReversed, meanings);
+    reading += situation + '\n\n';
     
-    // 2. Emotional Reflection - 감정적 반영
-    reading += '당신이 지금 느끼고 있는 것, ';
-    reading += '아니면 느끼려 하지 않으려 하는 것, ';
-    reading += '그런 게 여기 있을 수 있어요. ';
-    
-    // 3. Card Interpretation - 감정적 의미
-    if (meanings.length === 1) {
-        reading += meanings[0] + '이라는 것. ';
-        reading += '이게 당신의 마음에 자리하고 있는 것 같아요. ';
-    } else if (meanings.length === 2) {
-        reading += meanings[0] + '과 ' + meanings[1] + '. ';
-        reading += '이 두 가지가 당신의 지금과 함께 있네요. ';
-    } else {
-        const lastMeaning = meanings[meanings.length - 1];
-        const otherMeanings = meanings.slice(0, -1).join(', ');
-        reading += otherMeanings + ', 그리고 ' + lastMeaning + '. ';
-        reading += '이런 것들이 당신의 마음과 만나고 있어요. ';
-    }
-    
-    // 4. Gentle Guidance - 부드러운 안내
-    reading += '잠깐... ';
-    
+    // [3] 두 가지 흐름 (좋은 방향 / 주의)
+    reading += '가능한 흐름:\n';
     if (isReversed) {
-        const reversedGuidance = [
-            '이게 뒤집혀 있네요. 당신의 마음이 지금 어디를 향하고 있는지, 조금 더 천천히 살펴볼 수 있을 것 같아요.',
-            '뒤집혀 보입니다. 지금 무엇을 피하고 있는지, 아니면 무엇을 다시 봐야 하는지, 생각해볼 수 있어요.',
-            '거꾸로 있네요. 당신의 길이 지금 어디로 향하고 있는지, 다시 한 번 느껴볼 수 있을 것 같아요.'
-        ];
-        reading += reversedGuidance[Math.floor(Math.random() * reversedGuidance.length)] + ' ';
+        reading += '- 만약 천천히 살펴본다면: ' + getReversedPositiveFlow(card, meanings) + '\n';
+        reading += '- 만약 서두르거나 피한다면: ' + getReversedCautionFlow(card, meanings) + '\n\n';
     } else {
-        const uprightGuidance = [
-            '이게 바로 보이네요. 당신의 길이 지금 어디로 향하고 있는지, 느낄 수 있을 것 같아요.',
-            '바로 있습니다. 당신이 지금 어디에 있는지, 그리고 어디로 가고 있는지, 알 수 있을 것 같아요.',
-            '바로 보입니다. 당신의 마음이 지금 무엇을 원하고 있는지, 들을 수 있을 것 같아요.'
-        ];
-        reading += uprightGuidance[Math.floor(Math.random() * uprightGuidance.length)] + ' ';
+        reading += '- 만약 이 흐름을 따른다면: ' + getUprightPositiveFlow(card, meanings) + '\n';
+        reading += '- 만약 저항하거나 서두른다면: ' + getUprightCautionFlow(card, meanings) + '\n\n';
     }
     
-    // 질문 추가 (70% 확률)
-    if (Math.random() < 0.7) {
-        const questions = [
-            '이 말이 당신의 어디에 닿나요?',
-            '이것이 떠오르게 하는 기억이 있나요?',
-            '당신의 마음 어디에서 이 이야기가 울리는가요?',
-            '누구의 얼굴이 떠오르시나요?',
-            '이것이 당신에게 익숙한 느낌인가요?',
-            '당신이 조용히 간직하고 있던 것이 이것인가요?',
-            '이 말이 당신의 어느 부분과 마주하고 있나요?'
-        ];
-        reading += '\n\n' + questions[Math.floor(Math.random() * questions.length)];
-    }
+    // [4] 오늘의 한 가지 행동
+    const todayAction = getTodayAction(card, isReversed, meanings);
+    reading += '**오늘의 행동:** ' + todayAction + '\n\n';
     
-    // 5. Closing - 조용한 메아리
-    const closings = [
-        '이 말을 마음에 두고 하루를 보내보세요.',
-        '이 이야기를 가지고 오늘을 살펴보세요.',
-        '이 말들이 당신과 함께 있기를 바라요.',
-        '이것을 마음에 두고 천천히 걸어가시길 바라요.'
-    ];
-    
-    if (selectedCardCount > 1 && !isLast) {
-        reading += '\n\n' + '이제 다음 카드를 함께 보아요.';
-    } else if (isLast && selectedCardCount > 1) {
-        reading += '\n\n' + '모든 카드를 함께 보니, 당신의 상황에 대한 흐름이 보이네요.';
-    } else {
-        reading += '\n\n' + closings[Math.floor(Math.random() * closings.length)];
-    }
+    // [5] 마무리 질문 (필수)
+    const closingQuestion = getClosingQuestion(card, position, isReversed);
+    reading += closingQuestion;
     
     return reading;
+}
+
+// 핵심 메시지 생성
+function getCoreMessage(card, isReversed, meanings) {
+    const cardName = card.name;
+    const keyMeaning = meanings[0];
+    
+    if (isReversed) {
+        const reversedCores = {
+            'The Fool': ['준비 없는 시작은 위험할 수 있어요.'],
+            'The Magician': ['당신의 능력을 제대로 보지 못하고 있을 수 있어요.'],
+            'The High Priestess': ['내면의 목소리를 무시하고 있을 수 있어요.'],
+            'The Empress': ['풍요로움을 막고 있는 것이 있을 수 있어요.'],
+            'The Emperor': ['통제하려는 마음이 너무 강할 수 있어요.']
+        };
+        
+        if (reversedCores[cardName]) {
+            return reversedCores[cardName];
+        }
+        
+        return [
+            keyMeaning + '이 지금 막혀있을 수 있어요.',
+            '당신이 ' + keyMeaning + '을 피하고 있을 수 있어요.',
+            keyMeaning + '이 뒤집혀 보이고 있어요.'
+        ];
+    } else {
+        const uprightCores = {
+            'The Fool': ['새로운 시작의 순간이에요.'],
+            'The Magician': ['당신 안에 모든 것이 준비되어 있어요.'],
+            'The High Priestess': ['당신의 직감이 말하고 있어요.'],
+            'The Empress': ['풍요로움이 당신에게 다가오고 있어요.'],
+            'The Emperor': ['안정과 구조가 필요할 때예요.']
+        };
+        
+        if (uprightCores[cardName]) {
+            return uprightCores[cardName];
+        }
+        
+        return [
+            keyMeaning + '이 당신의 지금이에요.',
+            '당신이 ' + keyMeaning + '을 향해 가고 있어요.',
+            keyMeaning + '이 당신의 마음에 자리하고 있어요.'
+        ];
+    }
+}
+
+// 상황 & 감정 텍스트 생성
+function getSituationText(card, position, isReversed, meanings) {
+    const cardName = card.name;
+    const meaning1 = meanings[0];
+    const meaning2 = meanings.length > 1 ? meanings[1] : '';
+    
+    let situation = '';
+    
+    if (selectedCardCount > 1) {
+        const positionContext = {
+            '과거': '이미 지나간 시간 속에 ',
+            '현재': '지금 이 순간 ',
+            '미래': '앞으로 펼쳐질 시간에 ',
+            '조언': '이 카드가 조용히 건네는 말은 ',
+            '결과': '이것이 당신의 길이 향하는 곳은 '
+        };
+        situation = positionContext[position] || '';
+    }
+    
+    if (isReversed) {
+        const reversedSituations = [
+            '당신이 지금 ' + meaning1 + '을 피하거나, 반대로 너무 성급하게 ' + meaning1 + '을 향해 달려가고 있을 수 있어요. 마음 한편에 불안함이나 막힌 느낌이 있을 거예요.',
+            meaning1 + '이라는 것이 지금 당신의 마음에 거꾸로 서 있을 수 있어요. 뭔가 잘못된 것 같다는 느낌, 아니면 방향이 어긋났다는 생각이 들 수 있어요.',
+            '당신이 ' + meaning1 + '을 느끼지 못하거나, 느끼려 하지 않으려 하는 것이 여기 있을 수 있어요. 마음이 닫혀있거나, 혼란스러울 수 있어요.'
+        ];
+        situation += reversedSituations[Math.floor(Math.random() * reversedSituations.length)];
+    } else {
+        const uprightSituations = [
+            '당신이 지금 ' + meaning1 + '을 느끼고 있거나, 느끼려 하는 것이 여기 있어요. 마음 한편에 이 느낌이 자리하고 있을 거예요.',
+            meaning1 + '이라는 것이 지금 당신의 마음에 살아있어요. 이게 당신의 지금이고, 당신이 가고 있는 방향일 수 있어요.',
+            '당신이 ' + meaning1 + '을 경험하고 있거나, 경험하려 하는 순간에 있을 수 있어요. 마음이 이쪽을 향하고 있어요.'
+        ];
+        situation += uprightSituations[Math.floor(Math.random() * uprightSituations.length)];
+    }
+    
+    return situation;
+}
+
+// 역방향 긍정적 흐름
+function getReversedPositiveFlow(card, meanings) {
+    const meaning1 = meanings[0];
+    return '막혀있던 ' + meaning1 + '이 서서히 흐르기 시작할 수 있어요. 마음이 조금씩 열리고, 방향이 명확해질 거예요.';
+}
+
+// 역방향 주의 흐름
+function getReversedCautionFlow(card, meanings) {
+    const meaning1 = meanings[0];
+    return meaning1 + '이 더 깊이 막히거나, 방향이 더 어긋날 수 있어요. 서두르면 상황이 더 복잡해질 수 있어요.';
+}
+
+// 정방향 긍정적 흐름
+function getUprightPositiveFlow(card, meanings) {
+    const meaning1 = meanings[0];
+    return meaning1 + '이 더 깊어지고, 당신의 길이 더 명확해질 거예요. 마음이 편안해지고, 상황이 자연스럽게 흘러갈 수 있어요.';
+}
+
+// 정방향 주의 흐름
+function getUprightCautionFlow(card, meanings) {
+    const meaning1 = meanings[0];
+    return meaning1 + '을 너무 서두르거나, 반대로 저항하면 기회를 놓칠 수 있어요. 자연스러운 흐름을 막을 수 있어요.';
+}
+
+// 오늘의 행동 생성
+function getTodayAction(card, isReversed, meanings) {
+    const meaning1 = meanings[0];
+    
+    if (isReversed) {
+        const actions = [
+            '오늘 하루, ' + meaning1 + '에 대해 조금만 생각해보세요.',
+            '오늘은 ' + meaning1 + '을 피하지 말고, 한 번 들여다보세요.',
+            '오늘 하루, ' + meaning1 + '과 관련된 작은 것 하나를 다시 보아요.'
+        ];
+        return actions[Math.floor(Math.random() * actions.length)];
+    } else {
+        const actions = [
+            '오늘 하루, ' + meaning1 + '을 느껴보세요.',
+            '오늘은 ' + meaning1 + '을 향해 작은 걸음 하나 내딛어보세요.',
+            '오늘 하루, ' + meaning1 + '과 함께 있는 시간을 가져보세요.'
+        ];
+        return actions[Math.floor(Math.random() * actions.length)];
+    }
+}
+
+// 마무리 질문 생성
+function getClosingQuestion(card, position, isReversed) {
+    const questions = [
+        '이 말이 당신의 어디에 닿나요?',
+        '이것이 떠오르게 하는 기억이 있나요?',
+        '당신의 마음 어디에서 이 이야기가 울리는가요?',
+        '누구의 얼굴이 떠오르시나요?',
+        '이것이 당신에게 익숙한 느낌인가요?',
+        '당신이 조용히 간직하고 있던 것이 이것인가요?',
+        '이 말이 당신의 어느 부분과 마주하고 있나요?',
+        '이것이 당신의 삶 어디에서 일어나고 있나요?',
+        '이 말이 당신에게 무엇을 상기시키나요?'
+    ];
+    
+    return questions[Math.floor(Math.random() * questions.length)];
 }
 
 // 해석 표시 함수
@@ -778,16 +858,47 @@ function displayInterpretation() {
         const isLast = index === selectedCards.length - 1;
         const interpretationText = formatInterpretation(card, card.position, isLast);
         
-        // 줄바꿈을 <br>로 변환하여 표시
-        const lines = interpretationText.split('\n\n');
-        lines.forEach((line, lineIndex) => {
-            if (lineIndex > 0) {
+        // 마크다운 형식 파싱하여 표시
+        const lines = interpretationText.split('\n');
+        lines.forEach((line) => {
+            if (line.trim() === '') {
                 meaning.appendChild(document.createElement('br'));
-                meaning.appendChild(document.createElement('br'));
+                return;
             }
+            
             const lineDiv = document.createElement('div');
-            lineDiv.textContent = line;
-            lineDiv.style.marginBottom = lineIndex < lines.length - 1 ? '10px' : '0';
+            
+            // 굵은 텍스트 처리
+            if (line.startsWith('**') && line.endsWith('**')) {
+                const boldText = line.slice(2, -2);
+                lineDiv.innerHTML = '<strong>' + boldText + '</strong>';
+                lineDiv.style.fontSize = '1.2rem';
+                lineDiv.style.fontWeight = 'bold';
+                lineDiv.style.color = '#8b4513';
+                lineDiv.style.marginBottom = '15px';
+                lineDiv.style.marginTop = '10px';
+            } else if (line.startsWith('**') && line.includes(':**')) {
+                // "**오늘의 행동:** ..." 형식
+                const parts = line.split(':**');
+                const label = parts[0].slice(2);
+                const content = parts[1].trim();
+                lineDiv.innerHTML = '<strong>' + label + ':</strong> ' + content;
+                lineDiv.style.fontSize = '1.1rem';
+                lineDiv.style.marginBottom = '15px';
+                lineDiv.style.marginTop = '10px';
+            } else if (line.startsWith('- ')) {
+                // 리스트 항목
+                lineDiv.textContent = line;
+                lineDiv.style.marginLeft = '20px';
+                lineDiv.style.marginBottom = '8px';
+                lineDiv.style.lineHeight = '1.8';
+            } else {
+                // 일반 텍스트
+                lineDiv.textContent = line;
+                lineDiv.style.marginBottom = '12px';
+                lineDiv.style.lineHeight = '1.8';
+            }
+            
             meaning.appendChild(lineDiv);
         });
         
@@ -795,17 +906,7 @@ function displayInterpretation() {
         interpretationDiv.appendChild(cardInterp);
     });
     
-    // 마무리 문구 - 더 조용하고 개인적으로
-    const closingText = document.createElement('div');
-    closingText.className = 'interpretation-closing';
-    const closingMessages = [
-        '이 말들을 마음에 두고 하루를 보내보세요.',
-        '이 이야기를 가지고 오늘을 살펴보세요.',
-        '이 말들이 당신과 함께 있기를 바라요.',
-        '이것을 마음에 두고 천천히 걸어가시길 바라요.'
-    ];
-    closingText.textContent = closingMessages[Math.floor(Math.random() * closingMessages.length)];
-    interpretationDiv.appendChild(closingText);
+    // 마무리 문구는 각 카드 해석에 이미 포함되어 있으므로 제거
     
     interpretationDiv.classList.add('show');
     document.getElementById('resetSection').style.display = 'block';
